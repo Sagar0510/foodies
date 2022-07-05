@@ -2,7 +2,7 @@ const express = require("express");
 const {
   getAllReviews,
   top3reviews,
-  getReview,
+  getPlanReviews,
   createReview,
   updateReview,
   deleteReview,
@@ -11,12 +11,7 @@ const {
 const reviewRouter = express.Router();
 reviewRouter.route("/all").get(getAllReviews);
 reviewRouter.route("/top").get(top3reviews);
-reviewRouter
-  .route("/review/:reviewid")
-  .get(getReview)
-  .put(updateReview)
-  .delete(deleteReview);
-
-reviewRouter.route("/:planid").post(createReview);
+reviewRouter.route("/review/:reviewid").put(updateReview).delete(deleteReview);
+reviewRouter.route("/:planid").get(getPlanReviews).post(createReview);
 
 module.exports = reviewRouter;

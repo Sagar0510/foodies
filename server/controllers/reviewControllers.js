@@ -33,21 +33,22 @@ module.exports.top3reviews = async function top3reviews(req, res) {
     });
   }
 };
-module.exports.getReview = async function getReview(req, res) {
-  let reviewId = req.params.reviewid;
+module.exports.getPlanReviews = async function getPlanReviews(req, res) {
+  let planId = req.params.planid;
   try {
-    let review = await reviewModel.findById(reviewId);
-    if (review) {
-      return res.json(review);
+    let reviews = await reviewModel.find();
+    reviews = reviews.filter((review) => review.plan._id == planId);
+    if (reviews.length) {
+      return res.json(reviews);
     } else {
       return res.json({
-        message: "review not found",
+        message: "reviews not found",
       });
     }
   } catch (error) {
     if (error.kind == "ObjectId") {
       return res.json({
-        error: "review not found",
+        error: "reviews not found",
       });
     }
     res.json({
