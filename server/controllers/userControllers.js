@@ -40,11 +40,11 @@ module.exports.updateUser = async function updateUser(req, res) {
       for (let key in dataToBeUpdated) {
         user[key] = dataToBeUpdated[key];
       }
-      let data = await userModel.findByIdAndUpdate(userId, user);
-      // await user.save();
-      res.json(data);
+      // let data = await userModel.findByIdAndUpdate(userId, user);
+      await user.save();
+      return res.json(user);
     } else {
-      res.json({
+      return res.json({
         error: "user not found",
       });
     }
@@ -54,7 +54,7 @@ module.exports.updateUser = async function updateUser(req, res) {
         error: "user not found",
       });
     }
-    res.json(err);
+    res.json(error);
   }
 };
 
@@ -62,9 +62,9 @@ module.exports.deleteUser = async function deleteUser(req, res) {
   let userId = req.params.userid;
   try {
     let data = await userModel.findByIdAndDelete(userId);
-    if(data){
-    return res.json(data);
-    }else{
+    if (data) {
+      return res.json(data);
+    } else {
       return res.json({
         error: "user not found",
       });

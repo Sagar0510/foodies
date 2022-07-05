@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
-
 const emailValidator = require("email-validator");
+
 const userSchema = mongoose.Schema({
   name: {
     type: String,
@@ -12,9 +12,12 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    validate: function () {
-      return emailValidator.validate(this.email);
-    },
+    validate: [
+      function () {
+        return emailValidator.validate(this.email);
+      },
+      "invalid email!",
+    ],
   },
   password: {
     type: String,
