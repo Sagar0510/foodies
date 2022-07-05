@@ -4,16 +4,16 @@ const planSchema = mongoose.Schema({
   name: {
     type: String,
     unique: [true, "plan already exists"],
-    required: [true, "please provide plan name"],
-    maxlength: [20, "name should not exceed 20 characters"],
+    required: [true, "plan name required"],
+    maxlength: [20, "name exceeds 20 characters"],
   },
   duration: {
     type: Number,
-    required: [true, "please provide plan duration"],
+    required: [true, "plan duration required"],
   },
   price: {
     type: Number,
-    required: [true, "please provide plan price"],
+    required: [true, "plan price required"],
   },
   discount: {
     type: Number,
@@ -21,8 +21,12 @@ const planSchema = mongoose.Schema({
       function () {
         return this.discount <= 100;
       },
-      "discount cannot exceed 100%",
+      "discount % cannot exceed 100",
     ],
+  },
+  rating: {
+    type: Number,
+    default: 0,
   },
 });
 

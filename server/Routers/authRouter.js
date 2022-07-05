@@ -8,7 +8,6 @@ const {
   forgotPassword,
   resetPassword,
 } = require("../controllers/authControllers.js");
-const userModel = require("../models/userModel");
 
 authRouter.route("/signup").post(signupUser);
 authRouter.route("/login").post(loginUser);

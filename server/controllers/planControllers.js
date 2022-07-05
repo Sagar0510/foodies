@@ -1,4 +1,3 @@
-const express = require("express");
 const planModel = require("../models/planModel");
 
 module.exports.getAllPlans = async function getAllPlans(req, res) {
@@ -6,7 +5,9 @@ module.exports.getAllPlans = async function getAllPlans(req, res) {
     let allPlans = await planModel.find();
     return res.json(allPlans);
   } catch (error) {
-    res.json(error);
+    res.json({
+      error: error.message,
+    });
   }
 };
 
@@ -27,7 +28,9 @@ module.exports.getPlan = async function getPlan(req, res) {
         error: "plan not found",
       });
     }
-    res.json(error);
+    res.json({
+      error: error.message,
+    });
   }
 };
 
@@ -42,7 +45,9 @@ module.exports.createPlan = async function createPlan(req, res) {
         error: "user not found",
       });
     }
-    res.json(error);
+    res.json({
+      error: error.message,
+    });
   }
 };
 
@@ -68,9 +73,12 @@ module.exports.updatePlan = async function updatePlan(req, res) {
         error: "plan not found",
       });
     }
-    res.json(error);
+    res.json({
+      error: error.message,
+    });
   }
 };
+
 module.exports.deletePlan = async function deletePlan(req, res) {
   let planId = req.params.planid;
   try {
@@ -88,6 +96,19 @@ module.exports.deletePlan = async function deletePlan(req, res) {
         error: "plan not found",
       });
     }
-    res.json(error);
+    res.json({
+      error: error.message,
+    });
+  }
+};
+
+module.exports.top3plans = async function top3plans(req, res) {
+  try {
+    let plans = await planModel.find().sort({ rating: -1 }).limit(3);
+    return res.json(plans);
+  } catch (error) {
+    res.json({
+      error: error.message,
+    });
   }
 };

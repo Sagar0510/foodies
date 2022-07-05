@@ -6,23 +6,23 @@ const emailValidator = require("email-validator");
 const userSchema = mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: [true, "user name required"],
   },
   email: {
     type: String,
-    required: true,
-    unique: true,
+    required: [true, "email required"],
+    unique: [true, "email already registered"],
     validate: [
       function () {
         return emailValidator.validate(this.email);
       },
-      "invalid email!",
+      "invalid email",
     ],
   },
   password: {
     type: String,
-    required: true,
-    minLength: 8,
+    required: [true, "password required"],
+    minLength: [8, "password length smaller than 8"],
   },
   role: {
     type: String,

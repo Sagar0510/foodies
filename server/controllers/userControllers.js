@@ -1,4 +1,3 @@
-const express = require("express");
 const userModel = require("../models/userModel");
 
 module.exports.getUser = async function getUser(req, res) {
@@ -18,7 +17,9 @@ module.exports.getUser = async function getUser(req, res) {
         error: "user not found",
       });
     }
-    res.json(error);
+    res.json({
+      error: error.message,
+    });
   }
 };
 
@@ -27,7 +28,9 @@ module.exports.getAllUsers = async function getAllUsers(req, res) {
     let data = await userModel.find();
     return res.json(data);
   } catch (error) {
-    res.json(error);
+    res.json({
+      error: error.message,
+    });
   }
 };
 
@@ -54,7 +57,9 @@ module.exports.updateUser = async function updateUser(req, res) {
         error: "user not found",
       });
     }
-    res.json(error);
+    res.json({
+      error: error.message,
+    });
   }
 };
 
@@ -75,6 +80,8 @@ module.exports.deleteUser = async function deleteUser(req, res) {
         error: "user not found",
       });
     }
-    res.json(error);
+    res.json({
+      error: error.message,
+    });
   }
 };

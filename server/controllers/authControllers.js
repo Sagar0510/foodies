@@ -1,4 +1,3 @@
-const express = require("express");
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
 
@@ -13,7 +12,9 @@ module.exports.signupUser = async function signupUser(req, res) {
     let data = await userModel.create(user);
     res.json(data);
   } catch (error) {
-    res.json(error);
+    res.json({
+      error: error.message,
+    });
   }
 };
 
@@ -45,7 +46,9 @@ module.exports.loginUser = async function loginUser(req, res) {
       });
     }
   } catch (err) {
-    return res.json(err.message);
+    res.json({
+      error: error.message,
+    });
   }
 };
 
@@ -77,7 +80,9 @@ module.exports.forgotPassword = async function forgotPassword(req, res) {
       });
     }
   } catch (error) {
-    res.json(error.message);
+    res.json({
+      error: error.message,
+    });
   }
 };
 
@@ -105,7 +110,9 @@ module.exports.resetPassword = async function resetPassword(req, res) {
       });
     }
   } catch (error) {
-    res.json(error.message);
+    res.json({
+      error: error.message,
+    });
   }
 };
 
