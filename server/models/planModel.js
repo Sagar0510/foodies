@@ -28,6 +28,10 @@ const planSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  reviewsCount: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const planModel = mongoose.model("planModel", planSchema);

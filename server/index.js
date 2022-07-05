@@ -3,6 +3,7 @@ const express = require("express");
 const userRouter = require("./Routers/userRouter");
 const authRouter = require("./Routers/authRouter");
 const planRouter = require("./Routers/planRouter");
+const reviewRouter = require("./Routers/reviewRouter");
 const cookieParser = require("cookie-parser");
 const connectDatabase = require("./config/database");
 const app = express();
@@ -12,6 +13,7 @@ app.use(cookieParser());
 app.use("/users", userRouter);
 app.use("/auth", authRouter);
 app.use("/plans", planRouter);
+app.use("/reviews", reviewRouter);
 
 connectDatabase();
 app.listen(process.env.PORT, () => {
