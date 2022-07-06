@@ -1,2 +1,3 @@
 server/node_modules
 server/config/config.env
+server/test.html

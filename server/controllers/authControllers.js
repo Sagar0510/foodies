@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const userModel = require("../models/userModel");
+const { sendMail } = require("../utility/nodemailer");
 
 module.exports.signupUser = async function signupUser(req, res) {
   if (req.body.password != req.body.confirmPassword) {
@@ -69,6 +70,11 @@ module.exports.forgotPassword = async function forgotPassword(req, res) {
         "host"
       )}/resetpassword/${resetToken}`;
       //mail this link
+      let data = {
+        email: user.email,
+        resetLink: resetLink,
+      };
+      sendMail(data);
       await user.save();
       return res.json({
         message: "sent reset password link to email",
