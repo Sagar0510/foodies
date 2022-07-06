@@ -123,6 +123,8 @@ module.exports.checkAuthorization = function checkAuthorization(allowedRoles) {
       if (payload) {
         try {
           let user = await userModel.findById(payload.payload);
+          req.userId = user._id;
+          req.userRole = user.role;
           if (allowedRoles.includes(user.role)) {
             next();
           } else {
