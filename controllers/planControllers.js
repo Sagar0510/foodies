@@ -5,6 +5,7 @@ module.exports.getAllPlans = async function getAllPlans(req, res) {
     let allPlans = await planModel.find();
     return res.json(allPlans);
   } catch (error) {
+    console.log(error);
     res.json({
       error: error.message,
     });

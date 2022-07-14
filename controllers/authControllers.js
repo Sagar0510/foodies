@@ -24,6 +24,7 @@ module.exports.loginUser = async function loginUser(req, res) {
     let data = req.body;
     let user = await userModel.findOne({ email: data.email });
     if (user) {
+      // to be done: bcypt compare
       if (user.password == data.password) {
         let uid = user["_id"];
         let JWT = jwt.sign({ payload: uid }, process.env.JWT_KEY);
