@@ -6,7 +6,7 @@ const planRouter = require("./Routers/planRouter");
 const reviewRouter = require("./Routers/reviewRouter");
 const paymentRouter = require("./Routers/paymentRouter");
 const cookieParser = require("cookie-parser");
-const cors = requires("cors");
+const cors = require("cors");
 const connectDatabase = require("./config/database");
 const app = express();
 
